@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="results" blendMode="EXCLUSION" layoutX="522.0" layoutY="106.0" prefHeight="478.0" prefWidth="278.0" />
+      <TextField fx:id="cardSearch" blendMode="EXCLUSION" layoutX="522.0" layoutY="81.0" prefHeight="25.0" prefWidth="278.0" promptText="Search Card..." />
+      <Label layoutX="14.0" layoutY="36.0" prefHeight="39.0" prefWidth="278.0" text="Card Information" textFill="#f1f1f1">
+         <font>
+            <Font name="Lucida Sans Regular" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardName" layoutX="43.0" layoutY="121.0" text="Name:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardRace" layoutX="50.0" layoutY="173.0" text="Type:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardLevel" layoutX="49.0" layoutY="147.0" text="Level:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardAttribute" layoutX="22.0" layoutY="198.0" text="Attribute:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="249.0" text="Effect:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardType" layoutX="14.0" layoutY="223.0" text="Card Type:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="483.0" text="Atk:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="509.0" text="Def:" textFill="#f1f1f1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="cardEffect" blendMode="EXCLUSION" editable="false" layoutX="43.0" layoutY="274.0" prefHeight="200.0" prefWidth="462.0" wrapText="true" />
+   </children>
+</AnchorPane>
