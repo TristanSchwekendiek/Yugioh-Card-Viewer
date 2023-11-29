@@ -2,13 +2,13 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comp1011assignment21207799.CardController">
    <children>
       <ListView fx:id="results" blendMode="EXCLUSION" layoutX="522.0" layoutY="106.0" prefHeight="478.0" prefWidth="278.0" />
       <TextField fx:id="cardSearch" blendMode="EXCLUSION" layoutX="522.0" layoutY="81.0" prefHeight="25.0" prefWidth="278.0" promptText="Search Card..." />
@@ -47,16 +47,17 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="483.0" text="Atk:" textFill="#f1f1f1">
+      <Label fx:id="cardAtk" layoutX="62.0" layoutY="483.0" text="Atk:" textFill="#f1f1f1">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="61.0" layoutY="509.0" text="Def:" textFill="#f1f1f1">
+      <Label fx:id="cardDef" layoutX="61.0" layoutY="509.0" text="Def:" textFill="#f1f1f1">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <TextArea fx:id="cardEffect" blendMode="EXCLUSION" editable="false" layoutX="43.0" layoutY="274.0" prefHeight="200.0" prefWidth="462.0" wrapText="true" />
+      <ProgressBar fx:id="progressBar" layoutX="522.0" layoutY="56.0" prefHeight="18.0" prefWidth="278.0" progress="0.0" />
    </children>
 </AnchorPane>
