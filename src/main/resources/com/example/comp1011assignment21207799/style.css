@@ -1,3 +1,18 @@
 .root {
     -fx-background-color: #15171a;
 }
+.label{
+    -fx-text-fill: #f1f1f1;
+}
+
+.button{
+    -fx-cursor: hand;
+}
+
+.image-view{
+    -fx-cursor: hand;
+}
+
+.rectangle{
+    -fx-fill: #111122;
+}

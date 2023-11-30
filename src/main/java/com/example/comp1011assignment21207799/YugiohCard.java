@@ -1,7 +1,7 @@
 package com.example.comp1011assignment21207799;
 
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.Gson;
+
 public class YugiohCard {
     @SerializedName("id")
     String id;

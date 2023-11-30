@@ -4,12 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
 public class CardController {
+
+    @FXML
+    private Label errorMsg;
+    @FXML
+    private ImageView imgCard;
     @FXML
     private Label cardName;
     @FXML
@@ -27,63 +35,67 @@ public class CardController {
     @FXML
     private TextArea cardEffect;
     @FXML
-    private ListView results;
-    @FXML
     private TextField cardSearch;
     @FXML
-    private ProgressBar progressBar;
+    private Button btnSearch;
 
-    private ArrayList<LocalDateTime> apiCallTimes;
-
-    private int totalNumOfCards, page;
     @FXML
-    private void initialize() throws IOException, InterruptedException {
-        System.out.println("initialized"); // Log the card being searched
-        apiCallTimes = new ArrayList<>();
-        progressBar.setVisible(false);
-        searchYGO(null); // Call searchYGO method when a key is released
-        // Adding a listener to the cardSearch TextField for key presses
-        cardSearch.setOnKeyReleased(event -> {
-            try {
-                searchYGO(null); // Call searchYGO method when a key is released
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace(); // Handle exceptions appropriately
-            }
-        });
+    private void initialize() {
+        errorMsg.setVisible(false);
     }
 
     @FXML
-    void searchYGO(ActionEvent event) throws IOException, InterruptedException {
-        System.out.println("S"); // Log the card being searched
-        String cardName = cardSearch.getText();
-        clearOldTimeStamps();
-        page = 1;
-        if (!cardName.trim().isEmpty()) {
-            apiCallTimes.add(LocalDateTime.now());
-            if (apiCallTimes.size() < 20) {
-                System.out.println("Searching for card: " + cardName); // Log the card being searched
-                // Add more logging statements as needed for debugging purposes
+    void searchYGO(ActionEvent event) {
+        try {
+            //Retrieve the entered card name from the search bar
+            String cardName = cardSearch.getText();
 
-                APIResponse apiResponse = APIUtility.searchCards(cardName.trim(), page);
-                if (apiResponse != null) {
-                    totalNumOfCards = Integer.parseInt(apiResponse.getTotalResults());
-                    results.getItems().clear();
-                    if (apiResponse.getCards() != null) {
-                        results.getItems().addAll(apiResponse.getCards());
-                        updateLabels();
-                    }
-                }
-                else{
-                    System.out.println("null");
-                }
+            //Retrieve Yugioh card details using an API utility
+            YugiohDetails[] cardDetails = APIUtility.getCardDetails(cardName);
+
+            //If the cardDetails is not null, it prints some debugging infomation and sets the errorMsg label to not be visible
+            if (cardDetails != null) {
+                    errorMsg.setVisible(false);
+                    System.out.println("Received Card Details:");
+                    System.out.println("Name: " + cardDetails[0].getName());
+                    System.out.println("Level: " + cardDetails[0].getLevel());
+                    updateLabels(cardDetails[0]); //calls updateLabels
+            } else {
+                errorMsg.setVisible(true); //Sets the error message to be visible if no card is found
             }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    private void clearOldTimeStamps() {
-    }
-    private void updateLabels()
-    {
+    private void updateLabels(YugiohDetails cardDetails) throws IOException, InterruptedException {
+        //Gets card image
+        List<CardImage> cardImage = cardDetails.getCardImages();
+        String imageUrl = cardImage.get(0).getUrl();
+        //provided the details are not null, the labels are updated to display the card information
+        if (cardDetails != null) {
+            cardName.setText("Name:" + cardDetails.getName());
+            cardLevel.setText("Level:" +cardDetails.getLevel());
+            cardRace.setText("Type:" +cardDetails.getRace());
+            cardAttribute.setText("Attribute:" +cardDetails.getAttribute());
+            cardType.setText("Card Type:" +cardDetails.getType());
+            cardAtk.setText("Atk:" +cardDetails.getAtk());
+            cardDef.setText("Def:" +cardDetails.getDef());
+            cardEffect.setText(cardDetails.getEffect());
+            imgCard.setImage(loadImage(imageUrl));//Calls loadImage to get the card url
+        }
     }
 
+    //Converts the image URL to an actual image that can be loaded
+    private Image loadImage(String imageUrl) throws MalformedURLException {
+        System.out.println(imageUrl);
+        URL url = new URL(imageUrl);
+        try {
+            InputStream stream = url.openStream();
+            return new Image(stream);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
